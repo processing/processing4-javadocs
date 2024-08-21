@@ -1,4 +1,4 @@
-# processing4-javadocs
+# Processing 4 Javadoc
 This repository automatically generates the Javadoc for Processing 4 and hosts it on GitHub Pages
 
 ## License
