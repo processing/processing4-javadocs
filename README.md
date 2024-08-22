@@ -9,11 +9,11 @@ This repository uses a custom GitHub Actions workflow [`build-and-deploy-javadoc
 
 ### How It Works
 
-- **Scheduled Run:** The workflow is triggered every Monday at midnight (UTC) to ensure that the Javadocs are always up-to-date.
-- **Manual Trigger:** You can also manually trigger the workflow if needed.
-- **Javadocs Generation:** The workflow clones the `processing/processing4` repository, builds the Javadocs using `ant`, and copies the generated files to the `/docs` directory of this repository.
-- **Update Source Files:** The updated Javadocs are committed and pushed to the `gh-pages` branch.
-- **Deployment:** We've set "Deploy from branch" in the repo settings to trigger on push to the `gh-pages` branch.
+The workflow clones the `processing/processing4` repository, builds the Javadocs using `ant`, and copies the generated files to the `/docs` directory of this repository. The updated Javadocs are then committed and pushed to the `gh-pages` branch.
+
+The workflow is triggered every Monday at midnight (UTC) to ensure that the Javadocs are always up-to-date. You can also manually trigger the workflow if needed.
+
+We've set "Deploy from branch" in the repo settings to trigger on push to the `gh-pages` branch. Every time the `build-and-deploy-javadoc.yml` workflow completes, it will trigger a deploy to GitHub pages.
 
 This automation helps keep the Javadocs updated without requiring manual intervention.
 
