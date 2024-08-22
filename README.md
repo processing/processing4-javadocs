@@ -17,5 +17,9 @@ This repository uses a custom GitHub Actions workflow [`build-and-deploy-javadoc
 
 This automation helps keep the Javadocs updated without requiring manual intervention.
 
+## Legacy
+
+The source files for the [Processing 3 Javadocs](https://processing.github.io/processing-javadocs/core/) can be found at https://github.com/processing/processing-javadocs
+
 ## License
 The Processing 4 reference is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License ([CC-BY-NC-SA-4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)).
