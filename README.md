@@ -17,6 +17,13 @@ We've set "Deploy from branch" in the repo settings to trigger on push to the `g
 
 This automation helps keep the Javadocs updated without requiring manual intervention.
 
+## Limitations
+
+Currently, the workflow sources the main branch of the `processing/processing4` repository to generate the Javadocs. As a result, the Javadocs reflect the latest changes in the main branch, which might include updates that haven't been included in an official release yet. This could lead to discrepancies between the documentation and the most recent stable release of Processing 4
+
+## To Do
+- [ ] Update the workflow to generate Javadocs based on the latest stable release instead of the `main` branch.
+
 ## Legacy
 
 The source files for the [Processing 3 Javadocs](https://processing.github.io/processing-javadocs/core/) can be found at https://github.com/processing/processing-javadocs
