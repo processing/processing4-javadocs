@@ -9,6 +9,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      REPO: "benfry/processing4"
+      REMOTE_URL: "https://github.com/benfry/processing4.git"
+
     steps:
     - name: Checkout gh-pages branch
       uses: actions/checkout@v3
@@ -23,14 +27,49 @@ jobs:
 
     - name: Ensure Ant is installed
       run: |
-        sudo apt-get update
-        sudo apt-get install -y ant
+        if ! command -v ant &> /dev/null; then
+          echo "Ant not found, installing..."
+          sudo apt-get update && sudo apt-get install -y ant
+        else
+          echo "Ant is already installed"
+        fi
 
-    - name: Clone the processing4 repository
+    - name: Get the latest release tag and commit SHA
+      id: get-commit-sha
       run: |
-        git clone --depth 1 https://github.com/processing/processing4.git
+        # Step 1: Get the latest release tag
+        latest_tag=$(curl --silent "https://api.github.com/repos/${{ env.REPO }}/releases/latest" | jq -r .tag_name)
+        if [ -z "$latest_tag" ]; then
+          echo "Failed to retrieve the latest tag."
+          exit 1
+        fi
+        echo "Latest tag: $latest_tag"
+        
+        # Step 2: Get the SHA associated with the tag
+        response=$(curl --silent "https://api.github.com/repos/${{ env.REPO }}/git/ref/tags/$latest_tag")
+        type=$(echo "$response" | jq -r '.object.type')
+        tag_sha=$(echo "$response" | jq -r '.object.sha')
+        
+        # Step 3: Check if the tag points directly to a commit
+        if [ "$type" == "commit" ]; then
+            commit_sha="$tag_sha"
+        else
+            # If the tag points to an annotated tag, retrieve the commit SHA
+            commit_sha=$(curl --silent "https://api.github.com/repos/${{ env.REPO }}/git/tags/$tag_sha" | jq -r '.object.sha')
+        fi
+        
+        echo "Commit SHA: $commit_sha"
+        echo "commit_sha=$commit_sha" >> $GITHUB_ENV
 
-    - name: Generate Javadoc
+    - name: Fetch and checkout the specific commit
+      run: |
+        git init processing4
+        cd processing4
+        git remote add origin ${{ env.REMOTE_URL }}
+        git fetch --depth 1 origin ${{ env.commit_sha }}
+        git checkout ${{ env.commit_sha }}
+
+    - name: Generate Javadocs
       working-directory: processing4/build
       run: |
         ant doc
@@ -38,15 +77,23 @@ jobs:
     - name: Copy Javadoc to /docs directory
       run: |
         if [ -d "processing4/build/javadoc/core" ]; then
-          cp -r processing4/build/javadoc/core docs/
+          cp -r processing4/build/javadoc/core ../docs/
         fi
 
-    - name: Commit and Push changes to gh-pages
+    - name: Clean up the processing4 directory
+      run: |
+        rm -rf processing4/
+
+    - name: Commit and Push changes to gh-pages if any changes exist
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add docs/
-        git commit -m "Update Javadocs"
-        git push https://$PAT_TOKEN@github.com/processing/processing4-javadocs.git HEAD:gh-pages
+        if [ -n "$(git status --porcelain docs/)" ]; then
+          git add docs/
+          git commit -m "Update Javadocs"
+          git push https://$PAT_TOKEN@github.com/SableRaf/processing-javadoc-test.git HEAD:gh-pages
+        else
+          echo "No changes to commit."
+        fi
       env:
         PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
