@@ -94,7 +94,7 @@ jobs:
         path: processing4/build/javadoc
 
     - name: Upload Javadocs artifact for Commit
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: javadocs
         path: processing4/build/javadoc
