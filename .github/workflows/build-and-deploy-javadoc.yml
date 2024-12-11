@@ -110,3 +110,26 @@ jobs:
 
       - name: Echo the output page URL
         run: echo "Your site is live at ${{ steps.deployment.outputs.page_url }}"
+
+  commit-javadoc:
+    needs: build-javadoc
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Copy Javadocs to /doc folder
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          mkdir -p doc
+          cp -r processing4/build/javadoc/* doc/
+          git add doc/
+          if git diff-index --quiet HEAD; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update Javadocs"
+            git push
+          fi
