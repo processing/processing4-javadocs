@@ -91,13 +91,13 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         name: github-pages
-        path: processing4/build/javadoc
+        path: processing4/build/javadoc/core
 
     - name: Upload Javadocs artifact for Commit
       uses: actions/upload-artifact@v4
       with:
         name: javadocs
-        path: processing4/build/javadoc
+        path: processing4/build/javadoc/core
 
     - name: Clean up the processing4 directory
       run: |
