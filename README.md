@@ -7,9 +7,7 @@ This repository automatically generates the Javadoc for Processing 4 and hosts i
 
 This repository uses a custom GitHub Actions workflow [`build-and-deploy-javadoc.yml`](https://github.com/processing/processing4-javadocs/blob/gh-pages/.github/workflows/build-and-deploy-javadoc.yml) .
 
-The workflow clones the `processing/processing4` repository, gets the commit corresponding to the latest release, builds the Javadocs using `ant`, and copies the generated files to the `/docs` directory of this repository. The updated Javadocs are then committed and pushed to the `gh-pages` branch.
-
-The workflow is triggered every Monday at midnight (UTC). A maintainer can manually trigger the workflow if needed.
+The workflow builds the Javadocs using `ant doc`, then copies the generated files to the `/docs` directory of this repository and deploys them to GitHub Pages.
 
 ## Legacy
 
