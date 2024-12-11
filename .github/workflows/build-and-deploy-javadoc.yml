@@ -12,6 +12,9 @@ jobs:
     env:
       REPO: "processing/processing4"
 
+    outputs:
+      commit_sha: ${{ steps.get-commit-sha.outputs.commit_sha }}
+
     steps:
     - name: Get the latest release tag and commit SHA
       id: get-commit-sha
@@ -39,6 +42,7 @@ jobs:
         
         echo "Commit SHA: $commit_sha"
         echo "commit_sha=$commit_sha" >> $GITHUB_ENV
+        echo "commit_sha=$commit_sha" >> $GITHUB_OUTPUT
 
   build-javadoc:
     runs-on: ubuntu-latest
@@ -46,6 +50,7 @@ jobs:
 
     env:
       REMOTE_URL: "https://github.com/processing/processing4.git"
+      COMMIT_SHA: ${{ needs.fetch-latest-release.outputs.commit_sha }}
 
     steps:
     - name: Checkout repository
@@ -72,7 +77,7 @@ jobs:
       run: |
         git clone ${{ env.REMOTE_URL }} processing4
         cd processing4
-        git checkout ${{ env.commit_sha }}
+        git checkout ${{ env.COMMIT_SHA }}
 
     - name: Generate Javadocs
       working-directory: processing4/build
@@ -86,7 +91,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: processing4/build/javadoc
-        key: javadocs-${{ env.commit_sha }}
+        key: javadocs-${{ env.COMMIT_SHA }}
         restore-keys: |
           javadocs-
 
@@ -116,6 +121,8 @@ jobs:
   commit-javadoc:
     needs: build-javadoc
     runs-on: ubuntu-latest
+    env:
+      COMMIT_SHA: ${{ needs.fetch-latest-release.outputs.commit_sha }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -125,8 +132,8 @@ jobs:
       - name: Restore Javadocs from cache
         uses: actions/cache@v4
         with:
-          path: doc
-          key: javadocs-${{ env.commit_sha }}
+          path: processing4/build/javadoc
+          key: javadocs-${{ env.COMMIT_SHA }}
           restore-keys: |
             javadocs-
 
