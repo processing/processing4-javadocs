@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"processing.awt"},{"l":"processing.core"},{"l":"processing.data"},{"l":"processing.event"},{"l":"processing.opengl"}];updateSearchResults();
