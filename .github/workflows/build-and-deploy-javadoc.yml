@@ -70,7 +70,7 @@ jobs:
 
     - name: Fetch and checkout the specific commit
       run: |
-        git init --initial-branch=main processing4
+        git init --initial-branch=gh-pages processing4
         cd processing4
         git remote add origin ${{ env.REMOTE_URL }}
         git fetch --depth 1 origin ${{ env.commit_sha }}
