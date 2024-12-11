@@ -82,11 +82,13 @@ jobs:
     - name: Add .nojekyll file
       run: echo > processing4/build/javadoc/.nojekyll
 
-    - name: Upload Javadocs artifact
-      uses: actions/upload-pages-artifact@v3
+    - name: Cache Javadocs
+      uses: actions/cache@v4
       with:
-        name: github-pages
         path: processing4/build/javadoc
+        key: javadocs-${{ env.commit_sha }}
+        restore-keys: |
+          javadocs-
 
     - name: Clean up the processing4 directory
       run: |
@@ -120,10 +122,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Copy Javadocs to /doc folder
+      - name: Restore Javadocs from cache
+        uses: actions/cache@v4
+        with:
+          path: doc
+          key: javadocs-${{ env.commit_sha }}
+          restore-keys: |
+            javadocs-
+
+      - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Copy Javadocs to /doc folder
+        run: |
           mkdir -p doc
           cp -r processing4/build/javadoc/* doc/
           git add doc/
@@ -132,4 +145,3 @@ jobs:
           else
             git commit -m "Update Javadocs"
             git push
-          fi
