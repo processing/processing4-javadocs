@@ -87,7 +87,13 @@ jobs:
     - name: Add .nojekyll file
       run: echo > processing4/build/javadoc/.nojekyll
 
-    - name: Upload Javadocs artifact
+    - name: Upload Javadocs artifact for Deployment
+      uses: actions/upload-pages-artifact@v3
+      with:
+        name: github-pages
+        path: processing4/build/javadoc
+
+    - name: Upload Javadocs artifact for Commit
       uses: actions/upload-artifact@v4
       with:
         name: javadocs
@@ -111,7 +117,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: javadocs
+          artifact_name: github-pages
 
       - name: Echo the output page URL
         run: echo "Your site is live at ${{ steps.deployment.outputs.page_url }}"
