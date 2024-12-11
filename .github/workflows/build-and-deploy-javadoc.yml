@@ -125,7 +125,7 @@ jobs:
         run: echo "Your site is live at ${{ steps.deployment.outputs.page_url }}"
 
   commit-javadoc:
-    needs: build-javadoc
+    needs: [build-javadoc, fetch-latest-release]
     runs-on: ubuntu-latest
     env:
       COMMIT_SHA: ${{ needs.fetch-latest-release.outputs.commit_sha }}
@@ -138,7 +138,7 @@ jobs:
       - name: Restore Javadocs from cache
         uses: actions/cache@v4
         with:
-          path: doc
+          path: processing4/build/javadoc
           key: javadocs-${{ env.COMMIT_SHA }}
           restore-keys: |
             javadocs-
