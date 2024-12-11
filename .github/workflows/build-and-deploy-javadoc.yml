@@ -85,6 +85,11 @@ jobs:
           cp -r processing4/build/javadoc/core ../docs/
         fi
 
+    - name: Upload Javadocs artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: ./docs
+
     - name: Clean up the processing4 directory
       run: |
         rm -rf processing4/
@@ -116,19 +121,18 @@ jobs:
         PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
 
   deploy-javadoc:
+    needs: build-javadoc
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: commit-javadoc
-
     steps:
-    - name: Checkout gh-pages branch
-      uses: actions/checkout@v3
-      with:
-        repository: processing/processing4-javadocs
-        ref: gh-pages
-        fetch-depth: 0
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+      - name: Echo the output page URL
+        run: echo "Your site is live at ${{ steps.deployment.outputs.page_url }}"
