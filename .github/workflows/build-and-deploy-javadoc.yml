@@ -70,10 +70,8 @@ jobs:
 
     - name: Fetch and checkout the specific commit
       run: |
-        git init processing4
+        git clone ${{ env.REMOTE_URL }} processing4
         cd processing4
-        git remote add origin ${{ env.REMOTE_URL }}
-        git fetch --depth 1 origin ${{ env.commit_sha }}
         git checkout ${{ env.commit_sha }}
 
     - name: Generate Javadocs
@@ -99,7 +97,9 @@ jobs:
     - name: Checkout gh-pages branch
       uses: actions/checkout@v3
       with:
+        repository: processing/processing4-javadocs
         ref: gh-pages
+        fetch-depth: 0
 
     - name: Commit and Push changes to gh-pages if any changes exist
       run: |
@@ -108,7 +108,7 @@ jobs:
         if [ -n "$(git status --porcelain docs/)" ]; then
           git add docs/
           git commit -m "Update Javadocs"
-          git push https://$PAT_TOKEN@github.com/SableRaf/processing-javadoc-test.git HEAD:gh-pages
+          git push https://$PAT_TOKEN@github.com/processing/processing4-javadocs.git HEAD:gh-pages
         else
           echo "No changes to commit."
         fi
