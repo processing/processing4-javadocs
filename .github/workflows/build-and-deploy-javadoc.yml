@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      REPO: "benfry/processing4"
-      REMOTE_URL: "https://github.com/benfry/processing4.git"
+      REPO: "processing/processing4"
+      REMOTE_URL: "https://github.com/processing/processing4.git"
 
     steps:
     - name: Checkout gh-pages branch
