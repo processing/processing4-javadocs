@@ -154,3 +154,4 @@ jobs:
           else
             git commit -m "Update Javadocs"
             git push
+          fi
