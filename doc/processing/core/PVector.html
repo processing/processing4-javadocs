@@ -319,7 +319,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#heading()" class="member-name-link">heading</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Calculate the angle of rotation for this vector (only 2D vectors)</div>
+<div class="block">Calculate the vector's direction, that is, the angle this vector makes
+ with the positive X axis (only 2D vectors)</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>float</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#heading2D()" class="member-name-link">heading2D</a>()</code></div>
@@ -458,7 +459,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PVector.html" title="class in processing.core">PVector</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setHeading(float)" class="member-name-link">setHeading</a><wbr>(float&nbsp;angle)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the angle this vector makes with the positive X axis (only 2D vectors)
+ This is equivalent to changing the vector's direction to the given value.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PVector.html" title="class in processing.core">PVector</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMag(float)" class="member-name-link">setMag</a><wbr>(float&nbsp;len)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -1264,10 +1268,17 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="heading()">
 <h3>heading</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">heading</span>()</div>
-<div class="block">Calculate the angle of rotation for this vector (only 2D vectors)</div>
+<div class="block">Calculate the vector's direction, that is, the angle this vector makes
+ with the positive X axis (only 2D vectors)</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the angle of rotation</dd>
+<dd>the direction of the vector (angle with positive X axis)</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><code>PVector#setHeading()</code></li>
+</ul>
+</dd>
 <dt>Usage:</dt>
 <dd>web_application</dd>
 </dl>
@@ -1285,6 +1296,22 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="setHeading(float)">
 <h3>setHeading</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="PVector.html" title="class in processing.core">PVector</a></span>&nbsp;<span class="element-name">setHeading</span><wbr><span class="parameters">(float&nbsp;angle)</span></div>
+<div class="block">Sets the angle this vector makes with the positive X axis (only 2D vectors)
+ This is equivalent to changing the vector's direction to the given value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>angle</code> - the direction of the resultant vector</dd>
+<dt>Returns:</dt>
+<dd>this vector, rotated to have the given direction</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="#heading()"><code>heading()</code></a></li>
+</ul>
+</dd>
+<dt>Usage:</dt>
+<dd>web_application</dd>
+</dl>
 </section>
 </li>
 <li>

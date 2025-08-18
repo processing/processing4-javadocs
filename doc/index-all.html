@@ -932,6 +932,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="processing/opengl/PShapeOpenGL.html#bezierVertex(float,float,float,float,float,float,float,float,float)" class="member-name-link">bezierVertex(float, float, float, float, float, float, float, float, float)</a> - Method in class processing.opengl.<a href="processing/opengl/PShapeOpenGL.html" title="class in processing.opengl">PShapeOpenGL</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="processing/core/PConstants.html#BICUBIC" class="member-name-link">BICUBIC</a> - Static variable in interface processing.core.<a href="processing/core/PConstants.html" title="interface in processing.core">PConstants</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="processing/core/PConstants.html#BILINEAR" class="member-name-link">BILINEAR</a> - Static variable in interface processing.core.<a href="processing/core/PConstants.html" title="interface in processing.core">PConstants</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="processing/core/PApplet.html#binary(byte)" class="member-name-link">binary(byte)</a> - Static method in class processing.core.<a href="processing/core/PApplet.html" title="class in processing.core">PApplet</a></dt>
 <dd>
 <div class="block">Returns a String that contains the binary value of a byte.</div>
@@ -4608,7 +4612,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="processing/core/PVector.html#heading()" class="member-name-link">heading()</a> - Method in class processing.core.<a href="processing/core/PVector.html" title="class in processing.core">PVector</a></dt>
 <dd>
-<div class="block">Calculate the angle of rotation for this vector (only 2D vectors)</div>
+<div class="block">Calculate the vector's direction, that is, the angle this vector makes
+ with the positive X axis (only 2D vectors)</div>
 </dd>
 <dt><a href="processing/core/PVector.html#heading2D()" class="member-name-link">heading2D()</a> - Method in class processing.core.<a href="processing/core/PVector.html" title="class in processing.core">PVector</a></dt>
 <dd>
@@ -6501,6 +6506,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="processing/core/PShapeSVG.Font.html#namedGlyphs" class="member-name-link">namedGlyphs</a> - Variable in class processing.core.<a href="processing/core/PShapeSVG.Font.html" title="class in processing.core">PShapeSVG.Font</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="processing/opengl/PGL.html#NEAREST" class="member-name-link">NEAREST</a> - Static variable in class processing.opengl.<a href="processing/opengl/PGL.html" title="class in processing.opengl">PGL</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="processing/core/PConstants.html#NEAREST_NEIGHBOR" class="member-name-link">NEAREST_NEIGHBOR</a> - Static variable in interface processing.core.<a href="processing/core/PConstants.html" title="interface in processing.core">PConstants</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="processing/opengl/PJOGL.html#needSharedObjectSync()" class="member-name-link">needSharedObjectSync()</a> - Method in class processing.opengl.<a href="processing/opengl/PJOGL.html" title="class in processing.opengl">PJOGL</a></dt>
 <dd>&nbsp;</dd>
@@ -8446,7 +8453,11 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="processing/opengl/Texture.html#resize(int,int)" class="member-name-link">resize(int, int)</a> - Method in class processing.opengl.<a href="processing/opengl/Texture.html" title="class in processing.opengl">Texture</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="processing/awt/ShimAWT.html#resizeImage(processing.core.PImage,int,int)" class="member-name-link">resizeImage(PImage, int, int)</a> - Static method in class processing.awt.<a href="processing/awt/ShimAWT.html" title="class in processing.awt">ShimAWT</a></dt>
+<dt><a href="processing/core/PImage.html#resize(int,int,int)" class="member-name-link">resize(int, int, int)</a> - Method in class processing.core.<a href="processing/core/PImage.html" title="class in processing.core">PImage</a></dt>
+<dd>
+<div class="block">Resize the image to a new width and height.</div>
+</dd>
+<dt><a href="processing/awt/ShimAWT.html#resizeImage(processing.core.PImage,int,int,int)" class="member-name-link">resizeImage(PImage, int, int, int)</a> - Static method in class processing.awt.<a href="processing/awt/ShimAWT.html" title="class in processing.awt">ShimAWT</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="processing/core/PApplet.html#resume()" class="member-name-link">resume()</a> - Method in class processing.core.<a href="processing/core/PApplet.html" title="class in processing.core">PApplet</a></dt>
 <dd>
@@ -9489,7 +9500,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="processing/opengl/PSurfaceJOGL.html#setFrameRate(float)" class="member-name-link">setFrameRate(float)</a> - Method in class processing.opengl.<a href="processing/opengl/PSurfaceJOGL.html" title="class in processing.opengl">PSurfaceJOGL</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="processing/core/PVector.html#setHeading(float)" class="member-name-link">setHeading(float)</a> - Method in class processing.core.<a href="processing/core/PVector.html" title="class in processing.core">PVector</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the angle this vector makes with the positive X axis (only 2D vectors)
+ This is equivalent to changing the vector's direction to the given value.</div>
+</dd>
 <dt><a href="processing/opengl/PJOGL.html#setIcon(java.lang.String...)" class="member-name-link">setIcon(String...)</a> - Static method in class processing.opengl.<a href="processing/opengl/PJOGL.html" title="class in processing.opengl">PJOGL</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="processing/awt/PSurfaceAWT.html#setIcon(processing.core.PImage)" class="member-name-link">setIcon(PImage)</a> - Method in class processing.awt.<a href="processing/awt/PSurfaceAWT.html" title="class in processing.awt">PSurfaceAWT</a></dt>
